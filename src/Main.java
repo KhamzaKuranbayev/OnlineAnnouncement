@@ -1,5 +1,11 @@
+import java.util.Scanner;
+
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
+    static User onlineUser = null;
     public static void main(String[] args) {
+
+        int choice;
         // 1. Regions massivini ochish - 20 ta joy bo'lsin - boshlanishiga 3ta qiymat berilsin
 
         // 2.Distric massivini ochish - 20 ta joy bo'lsin - boshlanishiga 5ta qiymat berilsin
@@ -18,6 +24,7 @@ public class Main {
         // login
         // signUp
         // Exit
+
         Region[] regions = new Region[20];
         regions[0] = new Region(1,"Toshkent");
         regions[1] =new Region(2, "Samarqand");
@@ -54,5 +61,59 @@ public class Main {
         Message[] messages = new Message[20];
         Announcement[] announcements = new Announcement[20];
 
+        while (true) {
+            printMainMenu();
+            choice = scanner.nextInt();
+            // 1. Log In
+            // 2. Sign Up
+            // 3. Exit
+
+            switch (choice) {
+                case 1 -> login(users);
+                case 2 -> signUp(users, districts);
+                case 3 -> System.exit(0);
+            }
+
+            boolean b = true;
+            while (b) {
+                printOperations();
+                choice = scanner.nextInt();
+                // 1. Add announcement
+                // 2. View announcements
+                // 3. My announcements
+                // 4. Write message
+                // 5. Inbox
+                // 6. Logout;
+
+                switch (choice) {
+                    case 1 -> addAnnouncement(categories, subCategories, announcements);
+                    case 2 -> viewAnnouncements(announcements);
+                    case 3 -> viewMyAnnouncement(announcements);
+                    case 4 -> writeMessage(announcements, messages);
+                    case 5 -> viewInbox(messages);
+                    case 6 -> b = false;
+                }
+            }
+        }
     }
+    private static void printMainMenu() {
+        System.out.println("1. Log In");
+        System.out.println("2. Sign Up");
+        System.out.println("3. Exit");
+    }
+    private static void login(User[] users) {
+        System.out.print("Enter email: ");
+        String email = scanner.next();
+        System.out.print("Enter password: ");
+        String password = scanner.next();
+        for (User user : users) {
+            if (user != null) {
+                if (user.login(email, password)) {
+                    onlineUser = user;
+                    System.out.println("\n" + user.getName() + ", Welcome to Online Announcement System");
+                }
+            }
+        }
+    }
+
 }
