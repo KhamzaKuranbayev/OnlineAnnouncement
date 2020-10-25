@@ -27,8 +27,6 @@ public class User implements Authorization {
         return email;
     }
 
-    public void setEmail(String email)
-
     public District getDistrict() {
         return district;
     }
