@@ -96,11 +96,13 @@ public class Main {
             }
         }
     }
+
     private static void printMainMenu() {
         System.out.println("1. Log In");
         System.out.println("2. Sign Up");
         System.out.println("3. Exit");
     }
+
     private static void login(User[] users) {
         System.out.print("Enter email: ");
         String email = scanner.next();
@@ -112,6 +114,48 @@ public class Main {
                     onlineUser = user;
                     System.out.println("\n" + user.getName() + ", Welcome to Online Announcement System");
                 }
+            }
+        }
+    }
+
+    private static void signUp(User[] users, District[] districts) {
+        boolean b = true;
+        while (b) {
+
+            scanner = new Scanner(System.in);
+            System.out.print("\nFull Name: ");
+            String name = scanner.nextLine();
+            System.out.print("Email: ");
+            String email = scanner.nextLine();
+
+            printRegions(districts);
+            int districtId = scanner.nextInt();
+            District district = getDistrictById(districtId, districts);
+            if (district != null) {
+                System.out.println(district.toString());
+            }
+            scanner = new Scanner(System.in);
+            System.out.print("Phone: ");
+            String phone = scanner.nextLine();
+            System.out.print("Password: ");
+            String password = scanner.nextLine();
+
+            boolean notFound = checkUser(email, users);
+            if (notFound) {
+                int index = 0;
+                for (User user : users) {
+                    if (user == null) {
+                        users[index] = new User(name, email, district, password, phone);
+                        onlineUser = users[index];
+                        System.out.println("\n" + users[index].getName() + ", Welcome to Online Announcement System");
+                        b = false;
+                        break;
+                    }
+                    index++;
+                }
+            } else {
+                System.out.println("This user is already registered to system!\n");
+                b = false;
             }
         }
     }
