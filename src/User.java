@@ -1,4 +1,4 @@
-public class User {
+public class User implements Authorization {
     String name;
     String email;
     District district;
@@ -54,6 +54,11 @@ public class User {
     }
 
     @Override
+    public boolean login(String email, String password) {
+        return getEmail().equals(email) || getPassword().equals(password);
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
@@ -63,4 +68,5 @@ public class User {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
 }
