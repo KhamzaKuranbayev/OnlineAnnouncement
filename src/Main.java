@@ -160,4 +160,35 @@ public class Main {
         }
     }
 
+    private static void printRegions(District[] districts) {
+        System.out.println("Choose address:");
+        System.out.println("----------------------");
+        for (District district : districts) {
+            if (district != null) {
+                district.printInfo();
+            }
+        }
+        System.out.println("----------------------");
+    }
+
+    private static District getDistrictById(int districtId, District[] districts) {
+
+        for (District district : districts) {
+            if (district != null) {
+                if (district.getId() == districtId)
+                    return district;
+            }
+        }
+        return null;
+    }
+
+    private static boolean checkUser(String email, User[] users) {
+        for (User user : users) {
+            if (user != null) {
+                if (user.getEmail().equals(email))
+                    return false;
+            }
+        }
+        return true;
+    }
 }
