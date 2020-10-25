@@ -17,7 +17,9 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) {{
+        this.email = email;
+    }
         this.name = name;
     }
 
@@ -25,9 +27,7 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email)
 
     public District getDistrict() {
         return district;
