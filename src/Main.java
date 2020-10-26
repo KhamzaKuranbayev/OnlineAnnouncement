@@ -191,4 +191,34 @@ public class Main {
         }
         return true;
     }
+
+    private static void addAnnouncement(Category[] categories, SubCategory[] subCategories, Announcement[] announcements) {
+        scanner = new Scanner(System.in);
+
+        System.out.print("Title: ");
+        String title = scanner.nextLine();
+        categories(categories);
+
+        int choice = scanner.nextInt();
+        Category category = categories[choice - 1];
+
+        printSubCategories(subCategories, category);
+
+        choice = scanner.nextInt();
+        SubCategory subCategory = getSubCategoryByIndex(subCategories, category, choice);
+        if (subCategory != null) {
+            System.out.println(category.getName() + " > " + subCategory.getName());
+        }
+
+        System.out.println("Body: ");
+        scanner = new Scanner(System.in);
+        String body = scanner.nextLine();
+        System.out.println("Cost: ");
+        double cost = scanner.nextDouble();
+
+        announcements[indexAnnounce++] = new Announcement(title, body, onlineUser, subCategory, onlineUser.getDistrict(), cost);
+        hasAnnouncement = true;
+        System.out.println("Announcement saved!");
+    }
+
 }
