@@ -322,6 +322,24 @@ public class Main {
         if (index == 1)
             System.out.println("No data!");
         System.out.println("-----------------------------------------");
+
+    }
+
+    private static void viewMyAnnouncement(Announcement[] announcements) {
+        int index = 1;
+        System.out.println("All announcement");
+        System.out.println("-----------------------------------------");
+        for (Announcement announcement : announcements) {
+            if (announcement != null) {
+                if (announcement.getUser().equals(onlineUser)) {
+                    System.out.print(index + ". " + announcement.toString() + "\n");
+                    index++;
+                }
+            }
+        }
+        if (index == 1)
+            System.out.println("No data!");
+        System.out.println("-----------------------------------------");
     }
 
 
