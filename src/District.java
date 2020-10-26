@@ -40,7 +40,7 @@ public class District {
 
     @Override
     public String toString() {
-        return getName() + ", " + getRegion().getName();
+        return getName() + ", " + getRegion().getName(); // Yunusobod, Tashkent
     }
 
 }

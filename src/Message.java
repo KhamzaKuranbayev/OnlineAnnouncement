@@ -46,11 +46,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
-                "title='" + title + '\'' +
-                ", body='" + body + '\'' +
-                ", sender=" + sender +
-                ", announcement=" + announcement +
-                '}';
+        return getTitle() + " | " + getBody() + " | " + getSender().getName() + " | " + getSender().getDistrict().getName() + ", "
+                + getSender().getDistrict().getRegion().getName();
     }
 }

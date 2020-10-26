@@ -71,15 +71,18 @@ public class Main {
             // 3. Exit
 
             switch (choice) {
-                case 1 : login(users);
-                break;
-                case 2 : signUp(users, districts);
-                break;
-                case 3 : System.exit(0);
-                break;
+                case 1:
+                    login(users);
+                    break;
+                case 2:
+                    signUp(users, districts);
+                    break;
+                case 3:
+                    System.exit(0);
+                    break;
             }
 
-            if(onlineUser != null) {
+            if (onlineUser != null) {
                 boolean b = true;
                 while (b) {
                     printOperations();
@@ -92,12 +95,24 @@ public class Main {
                     // 6. Logout;
 
                     switch (choice) {
-                        case 1 : addAnnouncement(categories, subCategories, announcements);break;
-                        case 2 : viewAnnouncements(announcements);break;
-                        case 3 : viewMyAnnouncement(announcements);break;
-                        case 4 : writeMessage(announcements, messages);break;
-                        case 5 : viewInbox(messages);break;
-                        case 6 : b = false; break;
+                        case 1:
+                            addAnnouncement(categories, subCategories, announcements);
+                            break;
+                        case 2:
+                            viewAnnouncements(announcements);
+                            break;
+                        case 3:
+                            viewMyAnnouncement(announcements);
+                            break;
+                        case 4:
+                            writeMessage(announcements, messages);
+                            break;
+                        case 5:
+                            viewInbox(messages);
+                            break;
+                        case 6:
+                            b = false;
+                            break;
                     }
                 }
             }
@@ -267,6 +282,7 @@ public class Main {
 
         System.out.println("-----------------------------------------");
     }
+
     private static void writeMessage(Announcement[] announcements, Message[] messages) {
 
         if (hasAnnouncement) {
@@ -358,16 +374,6 @@ public class Main {
             System.out.println("No data!");
         System.out.println("-----------------------------------------");
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
