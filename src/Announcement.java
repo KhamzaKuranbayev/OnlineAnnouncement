@@ -1,53 +1,45 @@
 public class Announcement {
-    private String title;
-    private String body;
 
-    public void showAnnouncements(){
-        System.out.println("---All announcements---");
-        System.out.println();
-    }
+    String title;
+    String body;
+    User user;
+    SubCategory subCategory;
+    District district;
+    double cost;
 
-
-    public Announcement(String title, String body, double cost) {
+    public Announcement(String title, String body, User user, SubCategory subCategory, District district, double cost) {
         this.title = title;
         this.body = body;
+        this.user = user;
+        this.subCategory = subCategory;
+        this.district = district;
         this.cost = cost;
     }
 
-    private   double cost;
-
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getBody() {
         return body;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public User getUser() {
+        return user;
+    }
+
+    public District getDistrict() {
+        return district;
     }
 
     public double getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
-
     @Override
     public String toString() {
-        return "Announsment{" +
-                "title='" + title + '\'' +
-                ", body='" + body + '\'' +
-                ", cost=" + cost +
-                '}';
+        return getUser().getName() + "   |   " + getUser().getDistrict().getName() + ", "
+                + getUser().getDistrict().getRegion().getName() + "   |   " + getTitle() + "   |   "
+                + getBody() + "   |   " + getCost();
     }
 }

@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static User onlineUser = null;
+    static int indexAnnounce = 0;
+    static int indexMessage = 0;
+    static boolean hasAnnouncement = false;
 
     public static void main(String[] args) {
 
@@ -50,11 +53,11 @@ public class Main {
         categories[2] = new Category(3, "Elektronika", "fhgty");
 
 
-        SubCategory[] subcategories = new SubCategory[20];
-        subcategories[0] = new SubCategory(1, "Televizor", categories[2]);
-        subcategories[1] = new SubCategory(2, "Avto", categories[0]);
-        subcategories[2] = new SubCategory(3, "Bolalar kiyimlari", categories[1]);
-        subcategories[3] = new SubCategory(4, "Telefon", categories[2]);
+        SubCategory[] subCategories = new SubCategory[20];
+        subCategories[0] = new SubCategory(1, "Televizor", categories[2]);
+        subCategories[1] = new SubCategory(2, "Avto", categories[0]);
+        subCategories[2] = new SubCategory(3, "Bolalar kiyimlari", categories[1]);
+        subCategories[3] = new SubCategory(4, "Telefon", categories[2]);
 
 
         Message[] messages = new Message[20];
@@ -73,27 +76,39 @@ public class Main {
                 case 3 -> System.exit(0);
             }
 
-            boolean b = true;
-            while (b) {
-                printOperations();
-                choice = scanner.nextInt();
-                // 1. Add announcement
-                // 2. View announcements
-                // 3. My announcements
-                // 4. Write message
-                // 5. Inbox
-                // 6. Logout;
+            if(onlineUser != null) {
+                boolean b = true;
+                while (b) {
+                    printOperations();
+                    choice = scanner.nextInt();
+                    // 1. Add announcement
+                    // 2. View announcements
+                    // 3. My announcements
+                    // 4. Write message
+                    // 5. Inbox
+                    // 6. Logout;
 
-                switch (choice) {
-                    case 1 -> addAnnouncement(categories, subCategories, announcements);
-                    case 2 -> viewAnnouncements(announcements);
-                    case 3 -> viewMyAnnouncement(announcements);
-                    case 4 -> writeMessage(announcements, messages);
-                    case 5 -> viewInbox(messages);
-                    case 6 -> b = false;
+                    switch (choice) {
+                        case 1 -> addAnnouncement(categories, subCategories, announcements);
+                        case 2 -> viewAnnouncements(announcements);
+                        case 3 -> viewMyAnnouncement(announcements);
+                        case 4 -> writeMessage(announcements, messages);
+                        case 5 -> viewInbox(messages);
+                        case 6 -> b = false;
+                    }
                 }
             }
         }
+    }
+
+    private static void printOperations() {
+        System.out.println("\nChose the operation:");
+        System.out.println("1. Add announcement");
+        System.out.println("2. View announcements");
+        System.out.println("3. My announcements");
+        System.out.println("4. Write message");
+        System.out.println("5. Inbox");
+        System.out.println("6. Log out");
     }
 
     private static void printMainMenu() {
@@ -219,6 +234,21 @@ public class Main {
         hasAnnouncement = true;
         System.out.println("Announcement saved!");
     }
+
+    private static SubCategory getSubCategoryByIndex(SubCategory[] subCategories, Category category, int choice) {
+        int index = 1;
+        for (SubCategory subCategory : subCategories) {
+            if (subCategory != null) {
+                if (subCategory.getCategory().equals(category)) {
+                    if (index == choice)
+                        return subCategory;
+                    index++;
+                }
+            }
+        }
+        return null;
+    }
+
     private static void viewAnnouncements(Announcement[] announcements) {
         int index = 1;
         System.out.println("All announcement");
@@ -279,50 +309,34 @@ public class Main {
         System.out.println("-----------------------------------------");
     }
 
-    private static void writeMessage(Announcement[] announcements, Message[] messages) {
-
-        if (hasAnnouncement) {
-            viewAnnouncements(announcements);
-
-            System.out.println("Choose the announcement:");
-            int choice = scanner.nextInt();
-            Announcement announcement = announcements[choice - 1];
-
-            System.out.println();
-            System.out.println(announcement.getTitle() + " | " + announcement.getUser().getName()
-                    + " | " + announcement.getDistrict().getName() + ", " + announcement.getDistrict().getRegion().getName());
-
-            System.out.println("New Message");
-            System.out.print("Title: ");
-
-            scanner = new Scanner(System.in);
-            String title = scanner.nextLine();
-            System.out.print("Body: ");
-            String body = scanner.nextLine();
-
-            messages[indexMessage++] = new Message(title, body, onlineUser, announcement);
-            System.out.println("Message sent!");
-        } else {
-            System.out.println("There is no announcement!");
-        }
-    }
-
-    private static void viewInbox(Message[] messages) {
+    private static void printSubCategories(SubCategory[] subCategories, Category category) {
+        System.out.println(category.getName() + "'s subcategories:");
+        System.out.println("------------------------");
         int index = 1;
-        System.out.println("All Messages");
-        System.out.println("-----------------------------------------");
-        for (Message message : messages) {
-            if (message != null) {
-                if (message.getAnnouncement().getUser().equals(onlineUser)) {
-                    System.out.println(index + ". " + message.toString());
+        for (SubCategory subCategory : subCategories) {
+            if (subCategory != null) {
+                if (subCategory.getCategory().equals(category)) {
+                    System.out.println(index + ". " + subCategory.getName());
                     index++;
                 }
             }
         }
-        if (index == 1)
-            System.out.println("No data!");
-        System.out.println("-----------------------------------------");
+        System.out.println("------------------------");
+    }
 
+    private static void categories(Category[] categories) {
+        System.out.println("\nChoose the Category:");
+        System.out.println("------------------------");
+        int index = 1;
+        for (Category category : categories) {
+            if (category == null) {
+                break;
+            } else {
+                System.out.println(index + ". " + category.getName());
+                index++;
+            }
+        }
+        System.out.println("------------------------");
     }
 
     private static void viewMyAnnouncement(Announcement[] announcements) {
@@ -341,6 +355,8 @@ public class Main {
             System.out.println("No data!");
         System.out.println("-----------------------------------------");
     }
+
+
 
 
 
