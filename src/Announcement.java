@@ -2,6 +2,11 @@ public class Announcement {
     private String title;
     private String body;
 
+    public void showAnnouncements(){
+        System.out.println("---All announcements---");
+        System.out.println();
+    }
+
 
     public Announcement(String title, String body, double cost) {
         this.title = title;

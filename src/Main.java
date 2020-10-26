@@ -220,5 +220,20 @@ public class Main {
         hasAnnouncement = true;
         System.out.println("Announcement saved!");
     }
+    private static void viewAnnouncements(Announcement[] announcements) {
+        int index = 1;
+        System.out.println("All announcement");
+        System.out.println("-----------------------------------------");
+        for (Announcement announcement : announcements) {
+            if (announcement != null) {
+                System.out.print(index + ". " + announcement.toString() + "\n");
+                index++;
+            }
+        }
+        if (index == 1)
+            System.out.println("No data!");
+
+        System.out.println("-----------------------------------------");
+    }
 
 }
