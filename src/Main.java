@@ -71,9 +71,12 @@ public class Main {
             // 3. Exit
 
             switch (choice) {
-                case 1 -> login(users);
-                case 2 -> signUp(users, districts);
-                case 3 -> System.exit(0);
+                case 1 : login(users);
+                break;
+                case 2 : signUp(users, districts);
+                break;
+                case 3 : System.exit(0);
+                break;
             }
 
             if(onlineUser != null) {
@@ -89,12 +92,12 @@ public class Main {
                     // 6. Logout;
 
                     switch (choice) {
-                        case 1 -> addAnnouncement(categories, subCategories, announcements);
-                        case 2 -> viewAnnouncements(announcements);
-                        case 3 -> viewMyAnnouncement(announcements);
-                        case 4 -> writeMessage(announcements, messages);
-                        case 5 -> viewInbox(messages);
-                        case 6 -> b = false;
+                        case 1 : addAnnouncement(categories, subCategories, announcements);break;
+                        case 2 : viewAnnouncements(announcements);break;
+                        case 3 : viewMyAnnouncement(announcements);break;
+                        case 4 : writeMessage(announcements, messages);break;
+                        case 5 : viewInbox(messages);break;
+                        case 6 : b = false; break;
                     }
                 }
             }
