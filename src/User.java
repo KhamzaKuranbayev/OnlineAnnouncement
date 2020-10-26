@@ -53,7 +53,7 @@ public class User implements Authorization {
 
     @Override
     public boolean login(String email, String password) {
-        return getEmail().equals(email) || getPassword().equals(password);
+        return getEmail().equals(email) && getPassword().equals(password);
     }
 
     @Override
